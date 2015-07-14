@@ -6,8 +6,9 @@ function handle(data)
 {
     for (var i=0;i<commands.length;i++)
     {
-        if (data.message.slice(commands[i].name.length) === commands[i].name) {
+        if (data.message.slice(0,commands[i].name.length) === commands[i].name) {
             //missing permission level check
+            console.log("x");
             commands[i].handler(data);
             break;
         }
@@ -41,6 +42,8 @@ var _add={
 
     }
 };
+
+
 
 var _help={
     "name":".help",
