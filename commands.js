@@ -58,4 +58,12 @@ var _help={
     }
 };
 
-var commands=[_add,_help];
+var _info={
+    "name":".info",
+    "level":1,
+    "handler":function(data){
+        bot.sendChat("NI's plug moderator bot! Check the source and contribute at https://github.com/NIAEFEUP/PlugBot");
+    }
+}
+
+var commands=[_add,_help,_info];
