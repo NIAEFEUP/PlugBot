@@ -54,6 +54,16 @@ bot.on("userJoin",function(data){
    }
 });
 
+bot.on("advance",function(data){
+    try{
+        commands.songChange(data);
+    }
+    catch (e)
+    {
+        logger.error("exception in advance event:",e);
+    }
+});
+
 bot.on('close', reconnect);
 
 bot.on('error', reconnect);

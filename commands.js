@@ -27,7 +27,17 @@ function replyMention(data)
 
 function greet(data)
 {
-    bot.sendChat("Olá @"+data.username+"!");
+    bot.sendChat("Hi @"+data.username+"!");
+}
+
+function songChange(data)
+{
+    //Music.playing <-verify if last played, banned and other stuff
+    if (data.dj.user.role>1)
+    {
+        //gotta woot the overlords
+        bot.woot();
+    }
 }
 
 // command levels: 1-user,2-dj,3-bouncer,4-manager,5-host
