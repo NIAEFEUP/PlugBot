@@ -41,7 +41,7 @@ function greet(data)
 
 function songChange(data)
 {
-    if (data.currentDJ.role>-1)
+    if (data.currentDJ.role>0)
     {
         //gotta woot the overlords
         bot.woot();
