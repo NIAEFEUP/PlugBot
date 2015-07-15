@@ -71,7 +71,7 @@ bot.on("userJoin",function(data){
 
 bot.on("advance",function(data){
     try{
-        logger.info("music advancing: ",data)
+        //logger.info("music advancing: ",data)
         //Music.ended <-update last song with stats
         //Music.playing <-verify  if recently played, banned and other stuff
         commands.songChange(data);

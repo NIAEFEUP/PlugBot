@@ -77,7 +77,7 @@ var _help={
         var str="";
         for (var i=0;i<commands.length;i++)
         {
-            if (commands[i].level<1) //only show user commands, mods have to know their shit
+            if (commands[i].level<1&&commands[i].hidden!==true) //only show user commands, mods have to know their shit
                 str+=commands[i].name+" ";
         }
         bot.sendChat("Available commands: "+str);
@@ -92,6 +92,20 @@ var _info={
     }
 }
 
+var _skip={
+    "name":".skip",
+    "level":0, //temporary so that the user tro.trololol can have acess to it.
+    "hidden":true,
+    "handler":function(data){
+        //add message parsing for reason
+        if (data.from.role>=2||data.raw.un==="tro.trololol") //remove the if after updating the level key to the intended value 2
+        {
+            bot.moderateForceSkip();
+            bot.moderateDeleteChat(data.raw.cid);
+        }
+    }
+}
+
 var _woot={
     "name":".woot",
     "level":3,
@@ -101,7 +115,8 @@ var _woot={
     }
 }
 
-var commands=[_add,_help,_info,_woot];
+//tro.trololol
+var commands=[_add,_help,_info,_woot,_skip];
 
 
 //helper functions (DO NOT REPEAT YOURSELF)
