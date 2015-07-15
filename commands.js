@@ -1,16 +1,20 @@
 exports.handle = handle;
 exports.replyMention = replyMention;
 exports.greet = greet;
+exports.songChange = songChange;
 
 function handle(data)
 {
     for (var i=0;i<commands.length;i++)
     {
-        if (data.message.slice(0,commands[i].name.length) === commands[i].name) {
-            //missing permission level check
+        if (data.message.slice(0,commands[i].name.length) === commands[i].name && data.from.role>=commands[i].level) {
             commands[i].handler(data);
             break;
         }
+    }
+    if (i==commands.length)
+    {
+        bot.sendChat("Unknown command, try .help");
     }
 }
 
@@ -32,15 +36,16 @@ function greet(data)
 
 function songChange(data)
 {
+    console.log(data);
     //Music.playing <-verify if last played, banned and other stuff
-    if (data.dj.user.role>1)
+    if (data.dj.user.role>0)
     {
         //gotta woot the overlords
         bot.woot();
     }
 }
 
-// command levels: 1-user,2-dj,3-bouncer,4-manager,5-host
+// command levels: 0-user,1-dj,2-bouncer,3-manager,4-host
 
 //add user to queue
 var _add={
@@ -56,7 +61,7 @@ var _add={
 
 var _help={
     "name":".help",
-    "level":1,
+    "level":0,
     "handler":function(data){
         var str="";
         for (var i=0;i<commands.length;i++)
@@ -70,10 +75,19 @@ var _help={
 
 var _info={
     "name":".info",
-    "level":1,
+    "level":0,
     "handler":function(data){
         bot.sendChat("NI's plug moderator bot! Check the source and contribute at https://github.com/NIAEFEUP/PlugBot");
     }
 }
 
-var commands=[_add,_help,_info];
+var _woot={
+    "name":".woot",
+    "level":3,
+    "handler":function(data){
+        bot.woot();
+        bot.moderateDeleteChat(data.raw.cid);
+    }
+}
+
+var commands=[_add,_help,_info,_woot];
