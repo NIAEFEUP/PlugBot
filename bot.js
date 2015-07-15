@@ -35,6 +35,7 @@ bot.on("chat",function(data){
 
 bot.on("chat:mention",function(data){
     try{
+        logger.info("replying to mention: ",data)
         commands.replyMention(data);
     }
     catch (e)
@@ -44,8 +45,9 @@ bot.on("chat:mention",function(data){
 });
 
 bot.on("userJoin",function(data){
-    //User.join(data);
+
    try{
+        //User.join(data);
        commands.greet(data);
    }
    catch (e)
@@ -56,6 +58,8 @@ bot.on("userJoin",function(data){
 
 bot.on("advance",function(data){
     try{
+        logger.info("music advancing: ",data)
+        //Music.playing <-verify if last played, banned and other stuff
         commands.songChange(data);
     }
     catch (e)

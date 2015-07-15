@@ -36,9 +36,7 @@ function greet(data)
 
 function songChange(data)
 {
-    console.log(data);
-    //Music.playing <-verify if last played, banned and other stuff
-    if (data.dj.user.role>0)
+    if (data.currentDJ.role>0)
     {
         //gotta woot the overlords
         bot.woot();
@@ -50,7 +48,7 @@ function songChange(data)
 //add user to queue
 var _add={
     "name":".add",
-    "level":3,
+    "level":4,
     "handler":function(data){
         console.log("test add");
 
