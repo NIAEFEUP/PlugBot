@@ -48,14 +48,22 @@ function songChange(data)
 //add user to queue
 var _add={
     "name":".add",
-    "level":4,
+    "level":3,
     "handler":function(data){
-        console.log("test add");
+        //add to queue
+        //move() to requested position
 
     }
 };
 
-
+//move user in queue
+var _move={
+    "name":".add",
+    "level":3,
+    "handler":function(data){
+        //move()
+    }
+};
 
 var _help={
     "name":".help",
@@ -89,3 +97,10 @@ var _woot={
 }
 
 var commands=[_add,_help,_info,_woot];
+
+
+//helper functions (DO NOT REPEAT YOURSELF)
+function move()
+{
+
+}
