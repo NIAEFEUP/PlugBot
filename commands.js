@@ -26,6 +26,11 @@ function replyMention(data)
         bot.sendChat("fish go m00");
     else if (msg.search("cows")!=-1)
         bot.sendChat("cows go blub");
+    else if (msg.search(/(grande som|alto som|this is nice)/i)!=-1 && data.from.role>=3)
+    {
+        bot.woot();
+        bot.sendChat("Indeed");
+    }
     else bot.sendChat("Sup @"+data.raw.un);
 }
 
@@ -36,7 +41,7 @@ function greet(data)
 
 function songChange(data)
 {
-    if (data.currentDJ.role>0)
+    if (data.currentDJ.role>-1)
     {
         //gotta woot the overlords
         bot.woot();
