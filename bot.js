@@ -6,9 +6,14 @@ var commands = require(path.resolve(__dirname, 'commands.js'));
 var config = require(path.resolve(__dirname, 'config.json'));
 var reconnectionAttempts=0;
 
-bot = new plugAPI(config.auth);
-
-bot.connect(config.roomName);
+try{
+    bot = new plugAPI(config.auth);
+    bot.connect(config.roomName);
+}
+catch(e){
+    console.error("exception during connection attempt, exiting"); //connection timeouts should go to the reconnect event rather than here, needs confirmation
+    process.exit(3);
+}
 logger = plugAPI.CreateLogger('Bot');
 
 bot.on('roomJoin',function(room){
@@ -37,7 +42,7 @@ bot.on("chat",function(data){
     }
     catch (e)
     {
-        logger.error("exception in chat event:",e);
+        handleException(e,"chat event",data);
     }
 });
 
@@ -48,7 +53,7 @@ bot.on("chat:mention",function(data){
     }
     catch (e)
     {
-        logger.error("exception in chat_mention event:",e);
+        handleException(e,"chat:mention event",data);
     }
 });
 
@@ -65,7 +70,7 @@ bot.on("userJoin",function(data){
    }
    catch (e)
    {
-       logger.error("exception in userJoin event:",e);
+       handleException(e,"userJoin event",data);
    }
 });
 
@@ -78,7 +83,7 @@ bot.on("advance",function(data){
     }
     catch (e)
     {
-        logger.error("exception in advance event:",e);
+        handleException(e,"advance event",data);
     }
 });
 
@@ -94,7 +99,12 @@ function reconnect() {
     {
         reconnectionAttempts+=1;
         logger.error("reconnecting ",reconnectionAttempts);
-        bot.connect(config.roomName);
+        try{
+            bot.connect(config.roomName);
+        }
+        catch(e){
+            logger.error("exception during connection attempt:",e);
+        }
     }
     else
     {
@@ -103,7 +113,10 @@ function reconnect() {
     }
 }
 
-
+function handleException(e,source,data)
+{
+    logger.error("exception in ",source,"\nerror:",e," \ndata:",data);
+}
 
 
 
