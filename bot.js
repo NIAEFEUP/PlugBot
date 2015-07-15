@@ -57,7 +57,7 @@ bot.on("userJoin",function(data){
    try{
        //make a callback so it becomes asynchronous. If it was {User.join(data); commands.greet(data);}
        //the greet function would not execute exclusively after user.join, since that function has async
-       //database acess and it may finish execution at a later time. Using callback also allows to pass
+       //database access and it may finish execution at a later time. Using callback also allows to pass
        //information from the join function to the greet function.
 
        //User.join(data,function(){commands.greet(data);});

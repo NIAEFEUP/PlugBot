@@ -72,7 +72,7 @@ var _help={
         var str="";
         for (var i=0;i<commands.length;i++)
         {
-            if (commands[i].level==1) //only show user commands, mods have to know their shit
+            if (commands[i].level<1) //only show user commands, mods have to know their shit
                 str+=commands[i].name+" ";
         }
         bot.sendChat("Available commands: "+str);
