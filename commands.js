@@ -42,7 +42,7 @@ function replyMention(data)
 
 function greet(data)
 {
-    if (data.username)
+    if (data.username&&data.username!==config.myName)
     {
         bot.sendChat("Hi @"+data.username+"!");
     }
