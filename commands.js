@@ -78,6 +78,7 @@ var _move={
     }
 };
 
+//show available user commands
 var _help={
     "name":".help",
     "level":0,
@@ -92,6 +93,7 @@ var _help={
     }
 };
 
+//display information about the bot
 var _info={
     "name":".info",
     "level":0,
@@ -100,20 +102,20 @@ var _info={
     }
 }
 
+//skip the current song and provide a reason
 var _skip={
     "name":".skip",
-    "level":0, //temporary so that the user tro.trololol can have acess to it.
+    "level":2,
     "hidden":true,
     "handler":function(data){
-        //add message parsing for reason
-        if (data.from.role>=2||data.raw.un==="tro.trololol") //remove the if after updating the level key to the intended value 2
-        {
-            bot.moderateForceSkip();
-            bot.moderateDeleteChat(data.raw.cid);
-        }
+        bot.moderateForceSkip(function(){
+            bot.sendChat("Music skipped by @"+data.raw.un+":"+data.msg.slice(_skip.name.length));
+        });
+        bot.moderateDeleteChat(data.raw.cid);
     }
 }
 
+//woots the current song
 var _woot={
     "name":".woot",
     "level":3,
