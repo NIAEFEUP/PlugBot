@@ -31,6 +31,11 @@ function replyMention(data)
         bot.woot();
         bot.sendChat("Indeed");
     }
+    else if (msg.search("plz disconnect")!=-1 && data.from.role>=3)
+    {
+        bot.moderateDeleteChat(data.raw.cid);
+        disconnect();
+    }
     else bot.sendChat("Sup @"+data.raw.un);
 }
 
@@ -123,4 +128,11 @@ var commands=[_add,_help,_info,_woot,_skip];
 function move()
 {
 
+}
+
+function disconnect()
+{
+    logger.success("Exiting at request");
+    //bot.disconnect() doesn't exist, maybe implement it in the future
+    process.exit(0);
 }
