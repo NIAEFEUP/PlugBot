@@ -41,7 +41,10 @@ function replyMention(data)
 
 function greet(data)
 {
-    bot.sendChat("Hi @"+data.username+"!");
+    if (data.username)
+    {
+        bot.sendChat("Hi @"+data.username+"!");
+    }
 }
 
 function songChange(data)
