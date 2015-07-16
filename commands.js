@@ -69,6 +69,16 @@ var _add={
     }
 };
 
+//mehs the current song
+var _meh={
+    "name":".meh",
+    "level":3,
+    "handler":function(data){
+        bot.meh();
+        bot.moderateDeleteChat(data.raw.cid);
+    }
+}
+
 //move user in queue
 var _move={
     "name":".add",
@@ -126,7 +136,7 @@ var _woot={
 }
 
 //tro.trololol
-var commands=[_add,_help,_info,_woot,_skip];
+var commands=[_add,_help,_meh,_info,_woot,_skip];
 
 
 //helper functions (DO NOT REPEAT YOURSELF)
