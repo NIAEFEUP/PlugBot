@@ -63,9 +63,11 @@ var _add={
     "name":".add",
     "level":3,
     "handler":function(data){
-        //add to queue
-        //move() to requested position
+        var username = data.message.search();
+        var userid = getUserId(username);
+        bot.moderateAddDJ(userid,function(data){
 
+        });
     }
 };
 
@@ -136,10 +138,15 @@ var _woot={
 }
 
 //tro.trololol
-var commands=[_add,_help,_meh,_info,_woot,_skip];
+var commands=[_add,_help,_meh,_move,_info,_woot,_skip];
 
 
 //helper functions (DO NOT REPEAT YOURSELF)
+function getUserId(username)
+{
+
+}
+
 function move()
 {
 

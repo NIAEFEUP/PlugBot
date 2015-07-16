@@ -1,6 +1,7 @@
 var plugAPI = require('plugapi');
 var fs = require('fs');
 var path = require('path');
+var _ = require('underscore');
 
 var commands = require(path.resolve(__dirname, 'commands.js'));
 var config = require(path.resolve(__dirname, 'config.json'));
@@ -34,6 +35,7 @@ bot.on("chat",function(data){
     //
     //      {"raw":{"cid":"8266958-1436894615305","message":"ola","sub":0,"uid":8266958,"un":"Castigador da Parvoice"},"id":"8266958-1436894615305","from":{"avatarID":"base07","badge":null,"gRole":0,"grab":false,"id":8266958,"ignores":[],"joined":"2015-07-14 13:38:41.243226","language":"en","level":3,"notifications":[{"action":"levelUp","id":15762304,"timestamp":"2015-07-14 14:00:53.805598","value":"3"},{"action":"levelUp","id":15762071,"timestamp":"2015-07-14 13:43:41.379572","value":"2"}],"pp":1638,"pw":true,"role":0,"slug":"castigador-da-parvoice","status":1,"sub":0,"username":"Castigador da Parvoice","vote":0,"xp":122},"message":"ola","mentions":[],"muted":false,"type":"message"} : ola
     try{
+        data.message.trim();
         if (data.message.charAt(0)==='.')
         {
             logger.info("parsing command ",data.raw.un,":",data.message);
