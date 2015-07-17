@@ -82,7 +82,7 @@ var _meh={
 
 //move user in queue
 var _move={
-    "name":".add",
+    "name":".move",
     "level":3,
     "handler":function(data){
         //move()
