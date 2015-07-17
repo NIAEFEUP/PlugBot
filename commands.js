@@ -33,6 +33,7 @@ function replyMention(data)
     }
     else if (msg.search("plz disconnect")!=-1 && data.from.role>=3)
     {
+        //this should be a command. However this allows to dictate which bot disconnects, useful when using the test bot!
         bot.moderateDeleteChat(data.raw.cid);
         disconnect();
     }
@@ -41,7 +42,7 @@ function replyMention(data)
 
 function greet(data)
 {
-    if (data.username)
+    if (data.username&&data.username!==config.myName)
     {
         bot.sendChat("Hi @"+data.username+"!");
     }
@@ -83,7 +84,7 @@ var _meh={
 
 //move user in queue
 var _move={
-    "name":".add",
+    "name":".move",
     "level":3,
     "handler":function(data){
         //move()
@@ -154,7 +155,8 @@ function move()
 
 function disconnect()
 {
+    bot.sendChat("BRB guys");
     logger.success("Exiting at request");
     //bot.disconnect() doesn't exist, maybe implement it in the future
-    process.exit(0);
+    setTimeout(function (){process.exit(0);},100);
 }
