@@ -31,3 +31,4 @@ node_modules
 
 # Config file containing sensitive information
 config.json
+configGrab.json
